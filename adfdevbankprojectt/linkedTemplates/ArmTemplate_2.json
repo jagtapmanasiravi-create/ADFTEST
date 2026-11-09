@@ -54,12 +54,66 @@
 		"STPSQLSERVER_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "comaml"
+		},
+		"LS_AZURE_SQL_KV_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sqlserver-adf-practicess.database.windows.net"
+		},
+		"LS_AZURE_SQL_KV_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "BankingDB"
+		},
+		"LS_AZURE_SQL_KV_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sqladminuser"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_SRC_BLOB_TXT_ADLS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SRC_BLOB_TXT_ADLS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "events_large.txt",
+						"container": "inputtextfile"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_SRC_DEL_FILE')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SRC_DEL_FILE",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "ADF_AML_Transactions.csv",
+						"fileSystem": "test"
+					}
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DS_SRC_LOOKUP_ACT_FILE')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -320,6 +374,57 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/LS_AZURE_SQL_KV')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('LS_AZURE_SQL_KV_properties_typeProperties_server')]",
+					"database": "[parameters('LS_AZURE_SQL_KV_properties_typeProperties_database')]",
+					"encrypt": "optional",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('LS_AZURE_SQL_KV_properties_typeProperties_userName')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "LS_AKV_ADF",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "AzureSQLPassword"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_SINK_AZURESQL_TO_ADLS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DS_SINK_AZURESQL_TO_ADLS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "azuresqlservertoadlsgen2"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PL_BLOB_CSV_ADLS')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -528,7 +633,9 @@
 				"annotations": [],
 				"lastPublishTime": "2026-10-28T08:26:32Z"
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_SRC_BLOB_TXT_ADLS')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/PL_DELETE_FILE')]",
@@ -570,7 +677,9 @@
 				"annotations": [],
 				"lastPublishTime": "2026-11-04T01:21:31Z"
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_SRC_DEL_FILE')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/PL_FILTER_DATA_BY_FILENAME')]",
@@ -1117,388 +1226,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS_SRC_RESTAPI_ADLS')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_SORT_FILE_BY_EXTENSION')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Get Metadata File Sort",
-						"type": "GetMetadata",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "DS_BLOB_SRC_SORTING",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"fieldList": [
-								"childItems"
-							],
-							"storeSettings": {
-								"type": "AzureBlobStorageReadSettings",
-								"recursive": true,
-								"enablePartitionDiscovery": false
-							},
-							"formatSettings": {
-								"type": "BinaryReadSettings"
-							}
-						}
-					},
-					{
-						"name": "ForEach_File_Sorting",
-						"type": "ForEach",
-						"dependsOn": [
-							{
-								"activity": "Get Metadata File Sort",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@activity('Get Metadata File Sort').output.childItems",
-								"type": "Expression"
-							},
-							"isSequential": true,
-							"activities": [
-								{
-									"name": "Switch_File_Extension",
-									"type": "Switch",
-									"dependsOn": [],
-									"userProperties": [],
-									"typeProperties": {
-										"on": {
-											"value": "@toLower(last(split(item().name, '.')))",
-											"type": "Expression"
-										},
-										"cases": [
-											{
-												"value": "txt",
-												"activities": [
-													{
-														"name": "CPY_DATA_TXT_TO_ADLS",
-														"type": "Copy",
-														"dependsOn": [],
-														"policy": {
-															"timeout": "0.12:00:00",
-															"retry": 0,
-															"retryIntervalInSeconds": 30,
-															"secureOutput": false,
-															"secureInput": false
-														},
-														"userProperties": [],
-														"typeProperties": {
-															"source": {
-																"type": "BinarySource",
-																"storeSettings": {
-																	"type": "AzureBlobStorageReadSettings",
-																	"recursive": true
-																},
-																"formatSettings": {
-																	"type": "BinaryReadSettings"
-																}
-															},
-															"sink": {
-																"type": "BinarySink",
-																"storeSettings": {
-																	"type": "AzureBlobFSWriteSettings"
-																}
-															},
-															"enableStaging": false
-														},
-														"inputs": [
-															{
-																"referenceName": "DS_SRC_BLOB_STG_FILESORT",
-																"type": "DatasetReference",
-																"parameters": {
-																	"FileName": {
-																		"value": "@item().name",
-																		"type": "Expression"
-																	}
-																}
-															}
-														],
-														"outputs": [
-															{
-																"referenceName": "DS_SINK_ADLS_STG_FILESORT",
-																"type": "DatasetReference",
-																"parameters": {
-																	"FolderName": "txt",
-																	"FileName": {
-																		"value": "@item().name",
-																		"type": "Expression"
-																	}
-																}
-															}
-														]
-													}
-												]
-											},
-											{
-												"value": "csv",
-												"activities": [
-													{
-														"name": "CPY_DATA_CSV_TO_ADLS",
-														"type": "Copy",
-														"dependsOn": [],
-														"policy": {
-															"timeout": "0.12:00:00",
-															"retry": 0,
-															"retryIntervalInSeconds": 30,
-															"secureOutput": false,
-															"secureInput": false
-														},
-														"userProperties": [],
-														"typeProperties": {
-															"source": {
-																"type": "BinarySource",
-																"storeSettings": {
-																	"type": "AzureBlobStorageReadSettings",
-																	"recursive": true
-																},
-																"formatSettings": {
-																	"type": "BinaryReadSettings"
-																}
-															},
-															"sink": {
-																"type": "BinarySink",
-																"storeSettings": {
-																	"type": "AzureBlobFSWriteSettings"
-																}
-															},
-															"enableStaging": false
-														},
-														"inputs": [
-															{
-																"referenceName": "DS_SRC_BLOB_STG_FILESORT",
-																"type": "DatasetReference",
-																"parameters": {
-																	"FileName": {
-																		"value": "@item().name",
-																		"type": "Expression"
-																	}
-																}
-															}
-														],
-														"outputs": [
-															{
-																"referenceName": "DS_SINK_ADLS_STG_FILESORT",
-																"type": "DatasetReference",
-																"parameters": {
-																	"FolderName": "csv",
-																	"FileName": {
-																		"value": "@item().name",
-																		"type": "Expression"
-																	}
-																}
-															}
-														]
-													}
-												]
-											},
-											{
-												"value": "xlsx",
-												"activities": [
-													{
-														"name": "CPY_DATA_EXCEL_TO_ADLS",
-														"type": "Copy",
-														"dependsOn": [],
-														"policy": {
-															"timeout": "0.12:00:00",
-															"retry": 0,
-															"retryIntervalInSeconds": 30,
-															"secureOutput": false,
-															"secureInput": false
-														},
-														"userProperties": [],
-														"typeProperties": {
-															"source": {
-																"type": "BinarySource",
-																"storeSettings": {
-																	"type": "AzureBlobStorageReadSettings",
-																	"recursive": true
-																},
-																"formatSettings": {
-																	"type": "BinaryReadSettings"
-																}
-															},
-															"sink": {
-																"type": "BinarySink",
-																"storeSettings": {
-																	"type": "AzureBlobFSWriteSettings"
-																}
-															},
-															"enableStaging": false
-														},
-														"inputs": [
-															{
-																"referenceName": "DS_SRC_BLOB_STG_FILESORT",
-																"type": "DatasetReference",
-																"parameters": {
-																	"FileName": {
-																		"value": "@item().name",
-																		"type": "Expression"
-																	}
-																}
-															}
-														],
-														"outputs": [
-															{
-																"referenceName": "DS_SINK_ADLS_STG_FILESORT",
-																"type": "DatasetReference",
-																"parameters": {
-																	"FolderName": "excel",
-																	"FileName": {
-																		"value": "@item().name",
-																		"type": "Expression"
-																	}
-																}
-															}
-														]
-													}
-												]
-											}
-										]
-									}
-								}
-							]
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2026-11-07T04:01:40Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_STP_CUSTOMERDATA')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "StoredProcedureCustomerData",
-						"description": "Insert the data from Staging table to Main table",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[stp_transaction_import]",
-							"storedProcedureParameters": {
-								"TransactionDate": {
-									"value": {
-										"value": "@pipeline().parameters.pTransactionDate",
-										"type": "Expression"
-									},
-									"type": "DateTime"
-								},
-								"TransactionMode": {
-									"value": {
-										"value": "@pipeline().parameters.pTransactionMode",
-										"type": "Expression"
-									},
-									"type": "String"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "STPSQLSERVER",
-							"type": "LinkedServiceReference"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"parameters": {
-					"pTransactionDate": {
-						"type": "string",
-						"defaultValue": "2026-11-01"
-					},
-					"pTransactionMode": {
-						"type": "string",
-						"defaultValue": "UPI"
-					}
-				},
-				"annotations": [],
-				"lastPublishTime": "2026-11-02T02:09:48Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/STPSQLSERVER')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DS_CHILD_SQL_DYNAMIC_SOURCE')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LS_SRC_SQLSERVER_ADLS",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"TableName": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": {
-						"value": "@dataset().TableName",
-						"type": "Expression"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LS_SRC_SQLSERVER_ADLS')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DS_SRC_LOOKUP_FROM_SQLSERVER')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LS_SRC_LOOKUP_FROM_SQLSERVER",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Customer"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LS_SRC_LOOKUP_FROM_SQLSERVER')]"
 			]
 		}
 	]
