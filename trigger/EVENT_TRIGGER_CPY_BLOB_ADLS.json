@@ -3,7 +3,7 @@
 	"properties": {
 		"description": "Copy Activity using event trigger",
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipelines": [
 			{
 				"pipelineReference": {
