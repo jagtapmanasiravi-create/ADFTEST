@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'DS_SINK_AZURESQL_TO_ADLS'"
 		},
+		"LS_ADLS_CSV_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_ADLS_CSV'"
+		},
 		"LS_BLOB_SRC_SORTING_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'LS_BLOB_SRC_SORTING'"
@@ -51,6 +55,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_SINK_FILTER_FILENAME'"
 		},
+		"LS_SINK_FOREACH_ADLS_CSV_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_SINK_FOREACH_ADLS_CSV'"
+		},
 		"LS_SINK_RESTAPI_ADLS_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_SINK_RESTAPI_ADLS'"
@@ -79,6 +87,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_SRC_DEL_FILE'"
 		},
+		"LS_SRC_FOREACH_ADLS_CSV_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_SRC_FOREACH_ADLS_CSV'"
+		},
 		"LS_SRC_LOOKUP_ACT_FILE_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_SRC_LOOKUP_ACT_FILE'"
@@ -100,6 +112,10 @@
 			"metadata": "Secure string for 'password' of 'STPSQLSERVER'"
 		},
 		"DS_SINK_AZURESQL_TO_ADLS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_ADLS_CSV_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
 		},
@@ -155,6 +171,10 @@
 			"type": "string",
 			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
 		},
+		"LS_SINK_FOREACH_ADLS_CSV_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
 		"LS_SINK_RESTAPI_ADLS_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
@@ -164,6 +184,10 @@
 			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
 		},
 		"LS_SRC_DEL_FILE_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SRC_FOREACH_ADLS_CSV_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
 		},
@@ -249,6 +273,9 @@
 					"DS_SINK_AZURESQL_TO_ADLS_accountKey": {
 						"value": "[parameters('DS_SINK_AZURESQL_TO_ADLS_accountKey')]"
 					},
+					"LS_ADLS_CSV_accountKey": {
+						"value": "[parameters('LS_ADLS_CSV_accountKey')]"
+					},
 					"LS_BLOB_SRC_SORTING_connectionString": {
 						"value": "[parameters('LS_BLOB_SRC_SORTING_connectionString')]"
 					},
@@ -279,6 +306,9 @@
 					"LS_SINK_FILTER_FILENAME_accountKey": {
 						"value": "[parameters('LS_SINK_FILTER_FILENAME_accountKey')]"
 					},
+					"LS_SINK_FOREACH_ADLS_CSV_accountKey": {
+						"value": "[parameters('LS_SINK_FOREACH_ADLS_CSV_accountKey')]"
+					},
 					"LS_SINK_RESTAPI_ADLS_accountKey": {
 						"value": "[parameters('LS_SINK_RESTAPI_ADLS_accountKey')]"
 					},
@@ -294,14 +324,11 @@
 					"LS_SRC_BLOB_STG_FILESORT_connectionString": {
 						"value": "[parameters('LS_SRC_BLOB_STG_FILESORT_connectionString')]"
 					},
-					"LS_SRC_BLOB_TXT_ADLS_connectionString": {
-						"value": "[parameters('LS_SRC_BLOB_TXT_ADLS_connectionString')]"
-					},
-					"LS_SRC_DEL_FILE_accountKey": {
-						"value": "[parameters('LS_SRC_DEL_FILE_accountKey')]"
-					},
 					"DS_SINK_AZURESQL_TO_ADLS_properties_typeProperties_url": {
 						"value": "[parameters('DS_SINK_AZURESQL_TO_ADLS_properties_typeProperties_url')]"
+					},
+					"LS_ADLS_CSV_properties_typeProperties_url": {
+						"value": "[parameters('LS_ADLS_CSV_properties_typeProperties_url')]"
 					},
 					"LS_AKV_ADF_properties_typeProperties_baseUrl": {
 						"value": "[parameters('LS_AKV_ADF_properties_typeProperties_baseUrl')]"
@@ -333,14 +360,14 @@
 					"LS_SINK_FILTER_FILENAME_properties_typeProperties_url": {
 						"value": "[parameters('LS_SINK_FILTER_FILENAME_properties_typeProperties_url')]"
 					},
+					"LS_SINK_FOREACH_ADLS_CSV_properties_typeProperties_url": {
+						"value": "[parameters('LS_SINK_FOREACH_ADLS_CSV_properties_typeProperties_url')]"
+					},
 					"LS_SINK_RESTAPI_ADLS_properties_typeProperties_url": {
 						"value": "[parameters('LS_SINK_RESTAPI_ADLS_properties_typeProperties_url')]"
 					},
 					"LS_SINK_SQLSERVER_ADLS_properties_typeProperties_url": {
 						"value": "[parameters('LS_SINK_SQLSERVER_ADLS_properties_typeProperties_url')]"
-					},
-					"LS_SRC_DEL_FILE_properties_typeProperties_url": {
-						"value": "[parameters('LS_SRC_DEL_FILE_properties_typeProperties_url')]"
 					}
 				}
 			},
@@ -360,11 +387,26 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"LS_SRC_BLOB_TXT_ADLS_connectionString": {
+						"value": "[parameters('LS_SRC_BLOB_TXT_ADLS_connectionString')]"
+					},
+					"LS_SRC_DEL_FILE_accountKey": {
+						"value": "[parameters('LS_SRC_DEL_FILE_accountKey')]"
+					},
+					"LS_SRC_FOREACH_ADLS_CSV_accountKey": {
+						"value": "[parameters('LS_SRC_FOREACH_ADLS_CSV_accountKey')]"
+					},
 					"LS_SRC_LOOKUP_ACT_FILE_accountKey": {
 						"value": "[parameters('LS_SRC_LOOKUP_ACT_FILE_accountKey')]"
 					},
 					"LS_SRC_LOOKUP_FILTER_DATA_accountKey": {
 						"value": "[parameters('LS_SRC_LOOKUP_FILTER_DATA_accountKey')]"
+					},
+					"LS_SRC_DEL_FILE_properties_typeProperties_url": {
+						"value": "[parameters('LS_SRC_DEL_FILE_properties_typeProperties_url')]"
+					},
+					"LS_SRC_FOREACH_ADLS_CSV_properties_typeProperties_url": {
+						"value": "[parameters('LS_SRC_FOREACH_ADLS_CSV_properties_typeProperties_url')]"
 					},
 					"LS_SRC_LOOKUP_ACT_FILE_properties_typeProperties_url": {
 						"value": "[parameters('LS_SRC_LOOKUP_ACT_FILE_properties_typeProperties_url')]"
@@ -467,6 +509,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'adfdevbankprojectt_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "adfdevbankprojectt_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfdevbankprojectt_ArmTemplate_3')]"
 			]
 		}
 	]

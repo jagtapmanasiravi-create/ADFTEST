@@ -8,6 +8,9 @@
 		"DS_SINK_AZURESQL_TO_ADLS_accountKey": {
 			"value": ""
 		},
+		"LS_ADLS_CSV_accountKey": {
+			"value": ""
+		},
 		"LS_BLOB_SRC_SORTING_connectionString": {
 			"value": ""
 		},
@@ -38,6 +41,9 @@
 		"LS_SINK_FILTER_FILENAME_accountKey": {
 			"value": ""
 		},
+		"LS_SINK_FOREACH_ADLS_CSV_accountKey": {
+			"value": ""
+		},
 		"LS_SINK_RESTAPI_ADLS_accountKey": {
 			"value": ""
 		},
@@ -59,6 +65,9 @@
 		"LS_SRC_DEL_FILE_accountKey": {
 			"value": ""
 		},
+		"LS_SRC_FOREACH_ADLS_CSV_accountKey": {
+			"value": ""
+		},
 		"LS_SRC_LOOKUP_ACT_FILE_accountKey": {
 			"value": ""
 		},
@@ -75,6 +84,9 @@
 			"value": ""
 		},
 		"DS_SINK_AZURESQL_TO_ADLS_properties_typeProperties_url": {
+			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_ADLS_CSV_properties_typeProperties_url": {
 			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
 		},
 		"LS_AKV_ADF_properties_typeProperties_baseUrl": {
@@ -116,6 +128,9 @@
 		"LS_SINK_FILTER_FILENAME_properties_typeProperties_url": {
 			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
 		},
+		"LS_SINK_FOREACH_ADLS_CSV_properties_typeProperties_url": {
+			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
 		"LS_SINK_RESTAPI_ADLS_properties_typeProperties_url": {
 			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
 		},
@@ -123,6 +138,9 @@
 			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
 		},
 		"LS_SRC_DEL_FILE_properties_typeProperties_url": {
+			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SRC_FOREACH_ADLS_CSV_properties_typeProperties_url": {
 			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
 		},
 		"LS_SRC_LOOKUP_ACT_FILE_properties_typeProperties_url": {
