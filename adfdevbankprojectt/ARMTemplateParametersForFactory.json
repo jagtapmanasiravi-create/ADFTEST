@@ -1,0 +1,147 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adfdevbankprojectt"
+		},
+		"LS_BLOB_SRC_SORTING_connectionString": {
+			"value": ""
+		},
+		"LS_FILTER_FILE_BY_NAME_accountKey": {
+			"value": ""
+		},
+		"LS_GETMETDATA_FILTER_FILE_accountKey": {
+			"value": ""
+		},
+		"LS_GET_METADATA_ACT_accountKey": {
+			"value": ""
+		},
+		"LS_LOOKUP_FILTER_FILENAME_accountKey": {
+			"value": ""
+		},
+		"LS_SINK_ADLS_STG_FILESORT_accountKey": {
+			"value": ""
+		},
+		"LS_SINK_BLOB_CSV_ADLS_accountKey": {
+			"value": ""
+		},
+		"LS_SINK_BLOB_MULTICSV_ADLS_accountKey": {
+			"value": ""
+		},
+		"LS_SINK_BLOB_TEXT_ADLS_accountKey": {
+			"value": ""
+		},
+		"LS_SINK_FILTER_FILENAME_accountKey": {
+			"value": ""
+		},
+		"LS_SINK_RESTAPI_ADLS_accountKey": {
+			"value": ""
+		},
+		"LS_SINK_SQLSERVER_ADLS_accountKey": {
+			"value": ""
+		},
+		"LS_SRC_BLOB_CSV_ADLS_connectionString": {
+			"value": ""
+		},
+		"LS_SRC_BLOB_MULTICSV_ADLS_connectionString": {
+			"value": ""
+		},
+		"LS_SRC_BLOB_STG_FILESORT_connectionString": {
+			"value": ""
+		},
+		"LS_SRC_BLOB_TXT_ADLS_connectionString": {
+			"value": ""
+		},
+		"LS_SRC_DEL_FILE_accountKey": {
+			"value": ""
+		},
+		"LS_SRC_LOOKUP_ACT_FILE_accountKey": {
+			"value": ""
+		},
+		"LS_SRC_LOOKUP_FILTER_DATA_accountKey": {
+			"value": ""
+		},
+		"LS_SRC_LOOKUP_FROM_SQLSERVER_password": {
+			"value": ""
+		},
+		"LS_SRC_SQLSERVER_ADLS_password": {
+			"value": ""
+		},
+		"STPSQLSERVER_password": {
+			"value": ""
+		},
+		"LS_FILTER_FILE_BY_NAME_properties_typeProperties_url": {
+			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_GETMETDATA_FILTER_FILE_properties_typeProperties_url": {
+			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_GET_METADATA_ACT_properties_typeProperties_url": {
+			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_LOOKUP_FILTER_FILENAME_properties_typeProperties_url": {
+			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SINK_ADLS_STG_FILESORT_properties_typeProperties_url": {
+			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SINK_BLOB_CSV_ADLS_properties_typeProperties_url": {
+			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SINK_BLOB_MULTICSV_ADLS_properties_typeProperties_url": {
+			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SINK_BLOB_TEXT_ADLS_properties_typeProperties_url": {
+			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SINK_FILTER_FILENAME_properties_typeProperties_url": {
+			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SINK_RESTAPI_ADLS_properties_typeProperties_url": {
+			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SINK_SQLSERVER_ADLS_properties_typeProperties_url": {
+			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SRC_DEL_FILE_properties_typeProperties_url": {
+			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SRC_LOOKUP_ACT_FILE_properties_typeProperties_url": {
+			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SRC_LOOKUP_FILTER_DATA_properties_typeProperties_url": {
+			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_server": {
+			"value": ".\\SQLEXPRESS"
+		},
+		"LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_database": {
+			"value": "BankingPracticeDB"
+		},
+		"LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_userName": {
+			"value": "comaml"
+		},
+		"LS_SRC_RESTAPI_ADLS_properties_typeProperties_url": {
+			"value": "https://retoolapi.dev/5yDVOt/data"
+		},
+		"LS_SRC_SQLSERVER_ADLS_properties_typeProperties_server": {
+			"value": ".\\SQLEXPRESS"
+		},
+		"LS_SRC_SQLSERVER_ADLS_properties_typeProperties_database": {
+			"value": "BankingPracticeDB"
+		},
+		"LS_SRC_SQLSERVER_ADLS_properties_typeProperties_userName": {
+			"value": "comaml"
+		},
+		"STPSQLSERVER_properties_typeProperties_server": {
+			"value": ".\\SQLEXPRESS"
+		},
+		"STPSQLSERVER_properties_typeProperties_database": {
+			"value": "BankingPracticeDB"
+		},
+		"STPSQLSERVER_properties_typeProperties_userName": {
+			"value": "comaml"
+		}
+	}
+}

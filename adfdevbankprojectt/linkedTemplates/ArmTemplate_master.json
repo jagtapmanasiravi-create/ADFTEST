@@ -1,0 +1,424 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adfdevbankprojectt"
+		},
+		"LS_BLOB_SRC_SORTING_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_BLOB_SRC_SORTING'"
+		},
+		"LS_FILTER_FILE_BY_NAME_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_FILTER_FILE_BY_NAME'"
+		},
+		"LS_GETMETDATA_FILTER_FILE_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_GETMETDATA_FILTER_FILE'"
+		},
+		"LS_GET_METADATA_ACT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_GET_METADATA_ACT'"
+		},
+		"LS_LOOKUP_FILTER_FILENAME_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_LOOKUP_FILTER_FILENAME'"
+		},
+		"LS_SINK_ADLS_STG_FILESORT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_SINK_ADLS_STG_FILESORT'"
+		},
+		"LS_SINK_BLOB_CSV_ADLS_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_SINK_BLOB_CSV_ADLS'"
+		},
+		"LS_SINK_BLOB_MULTICSV_ADLS_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_SINK_BLOB_MULTICSV_ADLS'"
+		},
+		"LS_SINK_BLOB_TEXT_ADLS_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_SINK_BLOB_TEXT_ADLS'"
+		},
+		"LS_SINK_FILTER_FILENAME_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_SINK_FILTER_FILENAME'"
+		},
+		"LS_SINK_RESTAPI_ADLS_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_SINK_RESTAPI_ADLS'"
+		},
+		"LS_SINK_SQLSERVER_ADLS_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_SINK_SQLSERVER_ADLS'"
+		},
+		"LS_SRC_BLOB_CSV_ADLS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_SRC_BLOB_CSV_ADLS'"
+		},
+		"LS_SRC_BLOB_MULTICSV_ADLS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_SRC_BLOB_MULTICSV_ADLS'"
+		},
+		"LS_SRC_BLOB_STG_FILESORT_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_SRC_BLOB_STG_FILESORT'"
+		},
+		"LS_SRC_BLOB_TXT_ADLS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_SRC_BLOB_TXT_ADLS'"
+		},
+		"LS_SRC_DEL_FILE_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_SRC_DEL_FILE'"
+		},
+		"LS_SRC_LOOKUP_ACT_FILE_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_SRC_LOOKUP_ACT_FILE'"
+		},
+		"LS_SRC_LOOKUP_FILTER_DATA_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_SRC_LOOKUP_FILTER_DATA'"
+		},
+		"LS_SRC_LOOKUP_FROM_SQLSERVER_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_SRC_LOOKUP_FROM_SQLSERVER'"
+		},
+		"LS_SRC_SQLSERVER_ADLS_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_SRC_SQLSERVER_ADLS'"
+		},
+		"STPSQLSERVER_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'STPSQLSERVER'"
+		},
+		"LS_FILTER_FILE_BY_NAME_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_GETMETDATA_FILTER_FILE_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_GET_METADATA_ACT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_LOOKUP_FILTER_FILENAME_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SINK_ADLS_STG_FILESORT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SINK_BLOB_CSV_ADLS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SINK_BLOB_MULTICSV_ADLS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SINK_BLOB_TEXT_ADLS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SINK_FILTER_FILENAME_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SINK_RESTAPI_ADLS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SINK_SQLSERVER_ADLS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SRC_DEL_FILE_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SRC_LOOKUP_ACT_FILE_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SRC_LOOKUP_FILTER_DATA_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": ".\\SQLEXPRESS"
+		},
+		"LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "BankingPracticeDB"
+		},
+		"LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "comaml"
+		},
+		"LS_SRC_RESTAPI_ADLS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://retoolapi.dev/5yDVOt/data"
+		},
+		"LS_SRC_SQLSERVER_ADLS_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": ".\\SQLEXPRESS"
+		},
+		"LS_SRC_SQLSERVER_ADLS_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "BankingPracticeDB"
+		},
+		"LS_SRC_SQLSERVER_ADLS_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "comaml"
+		},
+		"STPSQLSERVER_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": ".\\SQLEXPRESS"
+		},
+		"STPSQLSERVER_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "BankingPracticeDB"
+		},
+		"STPSQLSERVER_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "comaml"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "adfdevbankprojectt_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LS_BLOB_SRC_SORTING_connectionString": {
+						"value": "[parameters('LS_BLOB_SRC_SORTING_connectionString')]"
+					},
+					"LS_FILTER_FILE_BY_NAME_accountKey": {
+						"value": "[parameters('LS_FILTER_FILE_BY_NAME_accountKey')]"
+					},
+					"LS_GETMETDATA_FILTER_FILE_accountKey": {
+						"value": "[parameters('LS_GETMETDATA_FILTER_FILE_accountKey')]"
+					},
+					"LS_GET_METADATA_ACT_accountKey": {
+						"value": "[parameters('LS_GET_METADATA_ACT_accountKey')]"
+					},
+					"LS_LOOKUP_FILTER_FILENAME_accountKey": {
+						"value": "[parameters('LS_LOOKUP_FILTER_FILENAME_accountKey')]"
+					},
+					"LS_SINK_ADLS_STG_FILESORT_accountKey": {
+						"value": "[parameters('LS_SINK_ADLS_STG_FILESORT_accountKey')]"
+					},
+					"LS_SINK_BLOB_CSV_ADLS_accountKey": {
+						"value": "[parameters('LS_SINK_BLOB_CSV_ADLS_accountKey')]"
+					},
+					"LS_SINK_BLOB_MULTICSV_ADLS_accountKey": {
+						"value": "[parameters('LS_SINK_BLOB_MULTICSV_ADLS_accountKey')]"
+					},
+					"LS_SINK_BLOB_TEXT_ADLS_accountKey": {
+						"value": "[parameters('LS_SINK_BLOB_TEXT_ADLS_accountKey')]"
+					},
+					"LS_SINK_FILTER_FILENAME_accountKey": {
+						"value": "[parameters('LS_SINK_FILTER_FILENAME_accountKey')]"
+					},
+					"LS_SINK_RESTAPI_ADLS_accountKey": {
+						"value": "[parameters('LS_SINK_RESTAPI_ADLS_accountKey')]"
+					},
+					"LS_SINK_SQLSERVER_ADLS_accountKey": {
+						"value": "[parameters('LS_SINK_SQLSERVER_ADLS_accountKey')]"
+					},
+					"LS_SRC_BLOB_CSV_ADLS_connectionString": {
+						"value": "[parameters('LS_SRC_BLOB_CSV_ADLS_connectionString')]"
+					},
+					"LS_SRC_BLOB_MULTICSV_ADLS_connectionString": {
+						"value": "[parameters('LS_SRC_BLOB_MULTICSV_ADLS_connectionString')]"
+					},
+					"LS_SRC_BLOB_STG_FILESORT_connectionString": {
+						"value": "[parameters('LS_SRC_BLOB_STG_FILESORT_connectionString')]"
+					},
+					"LS_SRC_BLOB_TXT_ADLS_connectionString": {
+						"value": "[parameters('LS_SRC_BLOB_TXT_ADLS_connectionString')]"
+					},
+					"LS_SRC_DEL_FILE_accountKey": {
+						"value": "[parameters('LS_SRC_DEL_FILE_accountKey')]"
+					},
+					"LS_SRC_LOOKUP_ACT_FILE_accountKey": {
+						"value": "[parameters('LS_SRC_LOOKUP_ACT_FILE_accountKey')]"
+					},
+					"LS_SRC_LOOKUP_FILTER_DATA_accountKey": {
+						"value": "[parameters('LS_SRC_LOOKUP_FILTER_DATA_accountKey')]"
+					},
+					"LS_FILTER_FILE_BY_NAME_properties_typeProperties_url": {
+						"value": "[parameters('LS_FILTER_FILE_BY_NAME_properties_typeProperties_url')]"
+					},
+					"LS_GETMETDATA_FILTER_FILE_properties_typeProperties_url": {
+						"value": "[parameters('LS_GETMETDATA_FILTER_FILE_properties_typeProperties_url')]"
+					},
+					"LS_GET_METADATA_ACT_properties_typeProperties_url": {
+						"value": "[parameters('LS_GET_METADATA_ACT_properties_typeProperties_url')]"
+					},
+					"LS_LOOKUP_FILTER_FILENAME_properties_typeProperties_url": {
+						"value": "[parameters('LS_LOOKUP_FILTER_FILENAME_properties_typeProperties_url')]"
+					},
+					"LS_SINK_ADLS_STG_FILESORT_properties_typeProperties_url": {
+						"value": "[parameters('LS_SINK_ADLS_STG_FILESORT_properties_typeProperties_url')]"
+					},
+					"LS_SINK_BLOB_CSV_ADLS_properties_typeProperties_url": {
+						"value": "[parameters('LS_SINK_BLOB_CSV_ADLS_properties_typeProperties_url')]"
+					},
+					"LS_SINK_BLOB_MULTICSV_ADLS_properties_typeProperties_url": {
+						"value": "[parameters('LS_SINK_BLOB_MULTICSV_ADLS_properties_typeProperties_url')]"
+					},
+					"LS_SINK_BLOB_TEXT_ADLS_properties_typeProperties_url": {
+						"value": "[parameters('LS_SINK_BLOB_TEXT_ADLS_properties_typeProperties_url')]"
+					},
+					"LS_SINK_FILTER_FILENAME_properties_typeProperties_url": {
+						"value": "[parameters('LS_SINK_FILTER_FILENAME_properties_typeProperties_url')]"
+					},
+					"LS_SINK_RESTAPI_ADLS_properties_typeProperties_url": {
+						"value": "[parameters('LS_SINK_RESTAPI_ADLS_properties_typeProperties_url')]"
+					},
+					"LS_SINK_SQLSERVER_ADLS_properties_typeProperties_url": {
+						"value": "[parameters('LS_SINK_SQLSERVER_ADLS_properties_typeProperties_url')]"
+					},
+					"LS_SRC_DEL_FILE_properties_typeProperties_url": {
+						"value": "[parameters('LS_SRC_DEL_FILE_properties_typeProperties_url')]"
+					},
+					"LS_SRC_LOOKUP_ACT_FILE_properties_typeProperties_url": {
+						"value": "[parameters('LS_SRC_LOOKUP_ACT_FILE_properties_typeProperties_url')]"
+					},
+					"LS_SRC_LOOKUP_FILTER_DATA_properties_typeProperties_url": {
+						"value": "[parameters('LS_SRC_LOOKUP_FILTER_DATA_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "adfdevbankprojectt_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LS_SRC_RESTAPI_ADLS_properties_typeProperties_url": {
+						"value": "[parameters('LS_SRC_RESTAPI_ADLS_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfdevbankprojectt_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "adfdevbankprojectt_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LS_SRC_LOOKUP_FROM_SQLSERVER_password": {
+						"value": "[parameters('LS_SRC_LOOKUP_FROM_SQLSERVER_password')]"
+					},
+					"LS_SRC_SQLSERVER_ADLS_password": {
+						"value": "[parameters('LS_SRC_SQLSERVER_ADLS_password')]"
+					},
+					"STPSQLSERVER_password": {
+						"value": "[parameters('STPSQLSERVER_password')]"
+					},
+					"LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_server": {
+						"value": "[parameters('LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_server')]"
+					},
+					"LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_database": {
+						"value": "[parameters('LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_database')]"
+					},
+					"LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_userName": {
+						"value": "[parameters('LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_userName')]"
+					},
+					"LS_SRC_SQLSERVER_ADLS_properties_typeProperties_server": {
+						"value": "[parameters('LS_SRC_SQLSERVER_ADLS_properties_typeProperties_server')]"
+					},
+					"LS_SRC_SQLSERVER_ADLS_properties_typeProperties_database": {
+						"value": "[parameters('LS_SRC_SQLSERVER_ADLS_properties_typeProperties_database')]"
+					},
+					"LS_SRC_SQLSERVER_ADLS_properties_typeProperties_userName": {
+						"value": "[parameters('LS_SRC_SQLSERVER_ADLS_properties_typeProperties_userName')]"
+					},
+					"STPSQLSERVER_properties_typeProperties_server": {
+						"value": "[parameters('STPSQLSERVER_properties_typeProperties_server')]"
+					},
+					"STPSQLSERVER_properties_typeProperties_database": {
+						"value": "[parameters('STPSQLSERVER_properties_typeProperties_database')]"
+					},
+					"STPSQLSERVER_properties_typeProperties_userName": {
+						"value": "[parameters('STPSQLSERVER_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfdevbankprojectt_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "adfdevbankprojectt_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfdevbankprojectt_ArmTemplate_2')]"
+			]
+		}
+	]
+}
