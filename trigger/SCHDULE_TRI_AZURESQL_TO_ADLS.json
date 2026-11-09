@@ -1,0 +1,25 @@
+{
+	"name": "SCHDULE_TRI_AZURESQL_TO_ADLS",
+	"properties": {
+		"description": "Copy data fron azure sql to adls",
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "PL_AZURESQL_TO_ADLS_KV",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2026-11-09T16:30:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}
