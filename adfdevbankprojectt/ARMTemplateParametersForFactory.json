@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "adfdevbankprojectt"
 		},
+		"DS_SINK_AZURESQL_TO_ADLS_accountKey": {
+			"value": ""
+		},
 		"LS_BLOB_SRC_SORTING_connectionString": {
 			"value": ""
 		},
@@ -71,8 +74,20 @@
 		"STPSQLSERVER_password": {
 			"value": ""
 		},
-		"DS_SINK_AZURESQL_TO_ADLS_accountKey": {
-			"value": ""
+		"DS_SINK_AZURESQL_TO_ADLS_properties_typeProperties_url": {
+			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_AKV_ADF_properties_typeProperties_baseUrl": {
+			"value": "https://kv-adf-practice-2026.vault.azure.net/"
+		},
+		"LS_AZURE_SQL_KV_properties_typeProperties_server": {
+			"value": "sqlserver-adf-practicess.database.windows.net"
+		},
+		"LS_AZURE_SQL_KV_properties_typeProperties_database": {
+			"value": "BankingDB"
+		},
+		"LS_AZURE_SQL_KV_properties_typeProperties_userName": {
+			"value": "sqladminuser"
 		},
 		"LS_FILTER_FILE_BY_NAME_properties_typeProperties_url": {
 			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
@@ -145,21 +160,6 @@
 		},
 		"STPSQLSERVER_properties_typeProperties_userName": {
 			"value": "comaml"
-		},
-		"LS_AKV_ADF_properties_typeProperties_baseUrl": {
-			"value": "https://kv-adf-practice-2026.vault.azure.net/"
-		},
-		"LS_AZURE_SQL_KV_properties_typeProperties_server": {
-			"value": "sqlserver-adf-practicess.database.windows.net"
-		},
-		"LS_AZURE_SQL_KV_properties_typeProperties_database": {
-			"value": "BankingDB"
-		},
-		"LS_AZURE_SQL_KV_properties_typeProperties_userName": {
-			"value": "sqladminuser"
-		},
-		"DS_SINK_AZURESQL_TO_ADLS_properties_typeProperties_url": {
-			"value": "https://adlsdevbankproject.dfs.core.windows.net/"
 		}
 	}
 }

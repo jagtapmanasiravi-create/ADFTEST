@@ -7,27 +7,65 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adfdevbankprojectt"
 		},
-		"DS_SINK_AZURESQL_TO_ADLS_accountKey": {
+		"LS_SRC_LOOKUP_ACT_FILE_accountKey": {
 			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'DS_SINK_AZURESQL_TO_ADLS'"
+			"metadata": "Secure string for 'accountKey' of 'LS_SRC_LOOKUP_ACT_FILE'"
+		},
+		"LS_SRC_LOOKUP_FILTER_DATA_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_SRC_LOOKUP_FILTER_DATA'"
+		},
+		"LS_SRC_LOOKUP_ACT_FILE_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_SRC_LOOKUP_FILTER_DATA_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
 		},
 		"LS_SRC_RESTAPI_ADLS_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://retoolapi.dev/5yDVOt/data"
-		},
-		"LS_AKV_ADF_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://kv-adf-practice-2026.vault.azure.net/"
-		},
-		"DS_SINK_AZURESQL_TO_ADLS_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_SRC_LOOKUP_ACT_FILE')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_SRC_LOOKUP_ACT_FILE_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_SRC_LOOKUP_ACT_FILE_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_SRC_LOOKUP_FILTER_DATA')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_SRC_LOOKUP_FILTER_DATA_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_SRC_LOOKUP_FILTER_DATA_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/LS_SRC_RESTAPI_ADLS')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -50,37 +88,6 @@
 			"properties": {
 				"type": "SelfHosted",
 				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LS_AKV_ADF')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Azure Sql server to ADLS using key valut ",
-				"annotations": [],
-				"type": "AzureKeyVault",
-				"typeProperties": {
-					"baseUrl": "[parameters('LS_AKV_ADF_properties_typeProperties_baseUrl')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DS_SINK_AZURESQL_TO_ADLS')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('DS_SINK_AZURESQL_TO_ADLS_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('DS_SINK_AZURESQL_TO_ADLS_accountKey')]"
-					}
-				}
 			},
 			"dependsOn": []
 		},
@@ -501,6 +508,31 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DS_SINK_AZURESQL_TO_ADLS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DS_SINK_AZURESQL_TO_ADLS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "azuresqlservertoadlsgen2"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DS_SINK_BLOB_CSV_ADLS')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -739,35 +771,6 @@
 						"type": "String"
 					}
 				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DS_SRC_BLOB_STG_FILESORT')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LS_SRC_BLOB_STG_FILESORT",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"FileName": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": {
-							"value": "@dataset().FileName",
-							"type": "Expression"
-						},
-						"container": "bankdailydata"
-					}
-				}
 			},
 			"dependsOn": []
 		}

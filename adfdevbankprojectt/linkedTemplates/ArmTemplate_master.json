@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adfdevbankprojectt"
 		},
+		"DS_SINK_AZURESQL_TO_ADLS_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'DS_SINK_AZURESQL_TO_ADLS'"
+		},
 		"LS_BLOB_SRC_SORTING_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'LS_BLOB_SRC_SORTING'"
@@ -95,9 +99,25 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'STPSQLSERVER'"
 		},
-		"DS_SINK_AZURESQL_TO_ADLS_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'DS_SINK_AZURESQL_TO_ADLS'"
+		"DS_SINK_AZURESQL_TO_ADLS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
+		},
+		"LS_AKV_ADF_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kv-adf-practice-2026.vault.azure.net/"
+		},
+		"LS_AZURE_SQL_KV_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sqlserver-adf-practicess.database.windows.net"
+		},
+		"LS_AZURE_SQL_KV_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "BankingDB"
+		},
+		"LS_AZURE_SQL_KV_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sqladminuser"
 		},
 		"LS_FILTER_FILE_BY_NAME_properties_typeProperties_url": {
 			"type": "string",
@@ -195,26 +215,6 @@
 			"type": "string",
 			"defaultValue": "comaml"
 		},
-		"LS_AKV_ADF_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://kv-adf-practice-2026.vault.azure.net/"
-		},
-		"LS_AZURE_SQL_KV_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": "sqlserver-adf-practicess.database.windows.net"
-		},
-		"LS_AZURE_SQL_KV_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "BankingDB"
-		},
-		"LS_AZURE_SQL_KV_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "sqladminuser"
-		},
-		"DS_SINK_AZURESQL_TO_ADLS_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
-		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -241,6 +241,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"DS_SINK_AZURESQL_TO_ADLS_accountKey": {
+						"value": "[parameters('DS_SINK_AZURESQL_TO_ADLS_accountKey')]"
 					},
 					"LS_BLOB_SRC_SORTING_connectionString": {
 						"value": "[parameters('LS_BLOB_SRC_SORTING_connectionString')]"
@@ -293,11 +296,11 @@
 					"LS_SRC_DEL_FILE_accountKey": {
 						"value": "[parameters('LS_SRC_DEL_FILE_accountKey')]"
 					},
-					"LS_SRC_LOOKUP_ACT_FILE_accountKey": {
-						"value": "[parameters('LS_SRC_LOOKUP_ACT_FILE_accountKey')]"
+					"DS_SINK_AZURESQL_TO_ADLS_properties_typeProperties_url": {
+						"value": "[parameters('DS_SINK_AZURESQL_TO_ADLS_properties_typeProperties_url')]"
 					},
-					"LS_SRC_LOOKUP_FILTER_DATA_accountKey": {
-						"value": "[parameters('LS_SRC_LOOKUP_FILTER_DATA_accountKey')]"
+					"LS_AKV_ADF_properties_typeProperties_baseUrl": {
+						"value": "[parameters('LS_AKV_ADF_properties_typeProperties_baseUrl')]"
 					},
 					"LS_FILTER_FILE_BY_NAME_properties_typeProperties_url": {
 						"value": "[parameters('LS_FILTER_FILE_BY_NAME_properties_typeProperties_url')]"
@@ -334,12 +337,6 @@
 					},
 					"LS_SRC_DEL_FILE_properties_typeProperties_url": {
 						"value": "[parameters('LS_SRC_DEL_FILE_properties_typeProperties_url')]"
-					},
-					"LS_SRC_LOOKUP_ACT_FILE_properties_typeProperties_url": {
-						"value": "[parameters('LS_SRC_LOOKUP_ACT_FILE_properties_typeProperties_url')]"
-					},
-					"LS_SRC_LOOKUP_FILTER_DATA_properties_typeProperties_url": {
-						"value": "[parameters('LS_SRC_LOOKUP_FILTER_DATA_properties_typeProperties_url')]"
 					}
 				}
 			},
@@ -359,17 +356,20 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"DS_SINK_AZURESQL_TO_ADLS_accountKey": {
-						"value": "[parameters('DS_SINK_AZURESQL_TO_ADLS_accountKey')]"
+					"LS_SRC_LOOKUP_ACT_FILE_accountKey": {
+						"value": "[parameters('LS_SRC_LOOKUP_ACT_FILE_accountKey')]"
+					},
+					"LS_SRC_LOOKUP_FILTER_DATA_accountKey": {
+						"value": "[parameters('LS_SRC_LOOKUP_FILTER_DATA_accountKey')]"
+					},
+					"LS_SRC_LOOKUP_ACT_FILE_properties_typeProperties_url": {
+						"value": "[parameters('LS_SRC_LOOKUP_ACT_FILE_properties_typeProperties_url')]"
+					},
+					"LS_SRC_LOOKUP_FILTER_DATA_properties_typeProperties_url": {
+						"value": "[parameters('LS_SRC_LOOKUP_FILTER_DATA_properties_typeProperties_url')]"
 					},
 					"LS_SRC_RESTAPI_ADLS_properties_typeProperties_url": {
 						"value": "[parameters('LS_SRC_RESTAPI_ADLS_properties_typeProperties_url')]"
-					},
-					"LS_AKV_ADF_properties_typeProperties_baseUrl": {
-						"value": "[parameters('LS_AKV_ADF_properties_typeProperties_baseUrl')]"
-					},
-					"DS_SINK_AZURESQL_TO_ADLS_properties_typeProperties_url": {
-						"value": "[parameters('DS_SINK_AZURESQL_TO_ADLS_properties_typeProperties_url')]"
 					}
 				}
 			},
@@ -400,6 +400,15 @@
 					"STPSQLSERVER_password": {
 						"value": "[parameters('STPSQLSERVER_password')]"
 					},
+					"LS_AZURE_SQL_KV_properties_typeProperties_server": {
+						"value": "[parameters('LS_AZURE_SQL_KV_properties_typeProperties_server')]"
+					},
+					"LS_AZURE_SQL_KV_properties_typeProperties_database": {
+						"value": "[parameters('LS_AZURE_SQL_KV_properties_typeProperties_database')]"
+					},
+					"LS_AZURE_SQL_KV_properties_typeProperties_userName": {
+						"value": "[parameters('LS_AZURE_SQL_KV_properties_typeProperties_userName')]"
+					},
 					"LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_server": {
 						"value": "[parameters('LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_server')]"
 					},
@@ -426,15 +435,6 @@
 					},
 					"STPSQLSERVER_properties_typeProperties_userName": {
 						"value": "[parameters('STPSQLSERVER_properties_typeProperties_userName')]"
-					},
-					"LS_AZURE_SQL_KV_properties_typeProperties_server": {
-						"value": "[parameters('LS_AZURE_SQL_KV_properties_typeProperties_server')]"
-					},
-					"LS_AZURE_SQL_KV_properties_typeProperties_database": {
-						"value": "[parameters('LS_AZURE_SQL_KV_properties_typeProperties_database')]"
-					},
-					"LS_AZURE_SQL_KV_properties_typeProperties_userName": {
-						"value": "[parameters('LS_AZURE_SQL_KV_properties_typeProperties_userName')]"
 					}
 				}
 			},
