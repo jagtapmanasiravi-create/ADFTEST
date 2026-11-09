@@ -1,0 +1,11 @@
+{
+	"name": "LS_AKV_ADF",
+	"properties": {
+		"description": "Azure Sql server to ADLS using key valut ",
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://kv-adf-practice-2026.vault.azure.net/"
+		}
+	}
+}
