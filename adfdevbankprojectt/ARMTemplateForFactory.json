@@ -3414,14 +3414,44 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/PL_EVENT_BASED_TRIGGER')]",
+			"name": "[concat(parameters('factoryName'), '/EVENT_TRIGGER_CPY_BLOB_ADLS')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Copy Activity using event trigger",
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "PL_EVENT_TRIGGER",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/inputfileseventtrigger/blobs/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('EVENT_TRIGGER_CPY_BLOB_ADLS_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_EVENT_TRIGGER')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_EVENT_TRIGGER')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"description": "Event based trigger",
 				"activities": [
 					{
-						"name": "CPY_EVENT_TRG",
+						"name": "CPY_EVENT_TRIGGER",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -3488,37 +3518,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS_SRC_BLOB_MULTICSV_ADLS')]",
 				"[concat(variables('factoryId'), '/datasets/DS_SINK_BLOB_MULTICSV_ADLS')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/EVENT_TRIGGER_CPY_BLOB_ADLS')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Copy Activity using event trigger",
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "PL_EVENT_BASED_TRIGGER",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/inputfileseventtrigger/blobs/",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('EVENT_TRIGGER_CPY_BLOB_ADLS_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PL_EVENT_BASED_TRIGGER')]"
 			]
 		}
 	]
