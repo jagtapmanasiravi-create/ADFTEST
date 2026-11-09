@@ -1,0 +1,23 @@
+{
+	"name": "LS_AZURE_SQL_KV",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "sqlserver-adf-practicess.database.windows.net",
+			"database": "BankingDB",
+			"encrypt": "optional",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "sqladminuser",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "LS_AKV_ADF",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "AzureSQLPassword"
+			}
+		}
+	}
+}
