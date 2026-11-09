@@ -160,6 +160,9 @@
 		},
 		"STPSQLSERVER_properties_typeProperties_userName": {
 			"value": "comaml"
+		},
+		"EVENT_TRIGGER_CPY_BLOB_ADLS_properties_typeProperties_scope": {
+			"value": "/subscriptions/b46c9318-1b73-46db-a46c-b487e61582dd/resourceGroups/rgdevbankprojectt/providers/Microsoft.Storage/storageAccounts/blobdevbankproject"
 		}
 	}
 }

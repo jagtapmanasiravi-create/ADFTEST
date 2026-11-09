@@ -215,6 +215,10 @@
 			"type": "string",
 			"defaultValue": "comaml"
 		},
+		"EVENT_TRIGGER_CPY_BLOB_ADLS_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/b46c9318-1b73-46db-a46c-b487e61582dd/resourceGroups/rgdevbankprojectt/providers/Microsoft.Storage/storageAccounts/blobdevbankproject"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -455,6 +459,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"EVENT_TRIGGER_CPY_BLOB_ADLS_properties_typeProperties_scope": {
+						"value": "[parameters('EVENT_TRIGGER_CPY_BLOB_ADLS_properties_typeProperties_scope')]"
 					}
 				}
 			},
