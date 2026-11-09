@@ -3,15 +3,8 @@
 	"properties": {
 		"description": "Copy Activity using event trigger",
 		"annotations": [],
-		"runtimeState": "Started",
-		"pipelines": [
-			{
-				"pipelineReference": {
-					"referenceName": "PL_EVENT_BASED_TRIGGER",
-					"type": "PipelineReference"
-				}
-			}
-		],
+		"runtimeState": "Stopped",
+		"pipelines": [],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
 			"blobPathBeginsWith": "/inputfileseventtrigger/blobs/",
