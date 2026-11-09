@@ -1,0 +1,19 @@
+{
+	"name": "DS_SINK_FOREACH_ADLS_CSV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SINK_FOREACH_ADLS_CSV",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "foreachactivity"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
