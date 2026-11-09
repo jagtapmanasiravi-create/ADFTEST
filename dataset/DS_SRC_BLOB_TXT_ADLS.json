@@ -1,0 +1,19 @@
+{
+	"name": "DS_SRC_BLOB_TXT_ADLS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SRC_BLOB_TXT_ADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "events_large.txt",
+				"container": "inputtextfile"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

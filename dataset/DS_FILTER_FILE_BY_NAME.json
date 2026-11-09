@@ -1,0 +1,90 @@
+{
+	"name": "DS_FILTER_FILE_BY_NAME",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_FILTER_FILE_BY_NAME",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"FileName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().FileName",
+					"type": "Expression"
+				},
+				"folderPath": "07112026",
+				"fileSystem": "dailyimportfile"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "AccountID",
+				"type": "String"
+			},
+			{
+				"name": "AccountNumber",
+				"type": "String"
+			},
+			{
+				"name": "CustomerID",
+				"type": "String"
+			},
+			{
+				"name": "BranchID",
+				"type": "String"
+			},
+			{
+				"name": "AccountTypeID",
+				"type": "String"
+			},
+			{
+				"name": "AccountOpenDate",
+				"type": "String"
+			},
+			{
+				"name": "AccountStatus",
+				"type": "String"
+			},
+			{
+				"name": "CurrencyCode",
+				"type": "String"
+			},
+			{
+				"name": "AvailableBalance",
+				"type": "String"
+			},
+			{
+				"name": "LedgerBalance",
+				"type": "String"
+			},
+			{
+				"name": "IsJointAccount",
+				"type": "String"
+			},
+			{
+				"name": "LastTransactionDate",
+				"type": "String"
+			},
+			{
+				"name": "CreatedAt",
+				"type": "String"
+			},
+			{
+				"name": "UpdatedAt",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

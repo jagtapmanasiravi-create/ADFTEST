@@ -1,0 +1,58 @@
+{
+	"name": "PL_PARENT_DAILY_EXPORT",
+	"properties": {
+		"activities": [
+			{
+				"name": "EXECUTE_CUSTOMER_EXPORT",
+				"description": "This is for to export the customer data to export another table we need to create the another pipeline",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_CHILD_SQL_TO_ADLS",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"TableName": "Customer",
+						"FileName": "customer.csv"
+					}
+				}
+			},
+			{
+				"name": "EXECUTE_ACCOUNT_EXPORT",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "EXECUTE_CUSTOMER_EXPORT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_CHILD_SQL_TO_ADLS",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"TableName": "Account",
+						"FileName": "account.csv"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-11-07T18:52:56Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

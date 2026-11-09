@@ -1,0 +1,65 @@
+{
+	"name": "PL_FILTER_DATA_FROM_FILE",
+	"properties": {
+		"description": "Filter activity to return only the record where accountstatus = ‘Active",
+		"activities": [
+			{
+				"name": "Lookup_FilterData",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "DS_SRC_LOOKUP_FILTER_DATA",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Filter_Data_From_ADLS",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "Lookup_FilterData",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup_FilterData').output.value",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@and(\n    equals(item().AccountStatus, 'Active'),\n    greater(int(item().BranchId), 9 )\n    \n     )",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-11-07T18:52:55Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

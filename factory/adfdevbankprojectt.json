@@ -1,0 +1,15 @@
+{
+	"name": "adfdevbankprojectt",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "2c33209e-3358-47f8-a5e5-af447c974579",
+		"tenantId": "209452ec-3ff5-4891-bfe2-273161e6ea40"
+	}
+}

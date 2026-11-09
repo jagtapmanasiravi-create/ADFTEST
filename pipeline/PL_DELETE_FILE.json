@@ -1,0 +1,36 @@
+{
+	"name": "PL_DELETE_FILE",
+	"properties": {
+		"activities": [
+			{
+				"name": "DEL_FILE",
+				"description": "Delete files from the folder",
+				"type": "Delete",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "DS_SRC_DEL_FILE",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-11-04T01:21:31Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

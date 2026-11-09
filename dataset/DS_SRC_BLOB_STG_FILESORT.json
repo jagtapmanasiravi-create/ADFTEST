@@ -1,0 +1,27 @@
+{
+	"name": "DS_SRC_BLOB_STG_FILESORT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SRC_BLOB_STG_FILESORT",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"FileName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().FileName",
+					"type": "Expression"
+				},
+				"container": "bankdailydata"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,22 @@
+{
+	"name": "LS_SRC_SQLSERVER_ADLS",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "Onpremises SQL Server to ADLS ",
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": ".\\SQLEXPRESS",
+			"database": "BankingPracticeDB",
+			"encrypt": "optional",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "comaml",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJjODNlZDkzNS0zYjJmLTRkMDEtOGJiZC0zZDI4NjY2NGI4MWYiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "selfHostDevBankProject",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

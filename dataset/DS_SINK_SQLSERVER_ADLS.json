@@ -1,0 +1,20 @@
+{
+	"name": "DS_SINK_SQLSERVER_ADLS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SINK_SQLSERVER_ADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "sqlserveroutputfile"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

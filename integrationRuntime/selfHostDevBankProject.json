@@ -1,0 +1,6 @@
+{
+	"name": "selfHostDevBankProject",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

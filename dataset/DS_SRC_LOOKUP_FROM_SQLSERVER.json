@@ -1,0 +1,17 @@
+{
+	"name": "DS_SRC_LOOKUP_FROM_SQLSERVER",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SRC_LOOKUP_FROM_SQLSERVER",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Customer"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

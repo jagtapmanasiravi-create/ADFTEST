@@ -1,0 +1,57 @@
+{
+	"name": "PL_STP_CUSTOMERDATA",
+	"properties": {
+		"activities": [
+			{
+				"name": "StoredProcedureCustomerData",
+				"description": "Insert the data from Staging table to Main table",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[stp_transaction_import]",
+					"storedProcedureParameters": {
+						"TransactionDate": {
+							"value": {
+								"value": "@pipeline().parameters.pTransactionDate",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"TransactionMode": {
+							"value": {
+								"value": "@pipeline().parameters.pTransactionMode",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "STPSQLSERVER",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"pTransactionDate": {
+				"type": "string",
+				"defaultValue": "2026-11-01"
+			},
+			"pTransactionMode": {
+				"type": "string",
+				"defaultValue": "UPI"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-11-02T02:09:48Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
