@@ -734,7 +734,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"container": "csvfilesdata"
+						"container": "inputfileseventtrigger"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
