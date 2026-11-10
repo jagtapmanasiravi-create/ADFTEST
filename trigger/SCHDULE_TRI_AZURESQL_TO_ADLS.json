@@ -3,7 +3,7 @@
 	"properties": {
 		"description": "Copy data fron azure sql to adls",
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"pipelines": [
 			{
 				"pipelineReference": {
