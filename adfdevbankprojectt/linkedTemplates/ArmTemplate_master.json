@@ -99,18 +99,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_SRC_LOOKUP_FILTER_DATA'"
 		},
-		"LS_SRC_LOOKUP_FROM_SQLSERVER_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'LS_SRC_LOOKUP_FROM_SQLSERVER'"
-		},
-		"LS_SRC_SQLSERVER_ADLS_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'LS_SRC_SQLSERVER_ADLS'"
-		},
-		"STPSQLSERVER_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'STPSQLSERVER'"
-		},
 		"DS_SINK_AZURESQL_TO_ADLS_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
@@ -199,45 +187,9 @@
 			"type": "string",
 			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
 		},
-		"LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": ".\\SQLEXPRESS"
-		},
-		"LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "BankingPracticeDB"
-		},
-		"LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "comaml"
-		},
 		"LS_SRC_RESTAPI_ADLS_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://retoolapi.dev/5yDVOt/data"
-		},
-		"LS_SRC_SQLSERVER_ADLS_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": ".\\SQLEXPRESS"
-		},
-		"LS_SRC_SQLSERVER_ADLS_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "BankingPracticeDB"
-		},
-		"LS_SRC_SQLSERVER_ADLS_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "comaml"
-		},
-		"STPSQLSERVER_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": ".\\SQLEXPRESS"
-		},
-		"STPSQLSERVER_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "BankingPracticeDB"
-		},
-		"STPSQLSERVER_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "comaml"
 		},
 		"EVENT_TRIGGER_CPY_BLOB_ADLS_properties_typeProperties_scope": {
 			"type": "string",
@@ -437,15 +389,6 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"LS_SRC_LOOKUP_FROM_SQLSERVER_password": {
-						"value": "[parameters('LS_SRC_LOOKUP_FROM_SQLSERVER_password')]"
-					},
-					"LS_SRC_SQLSERVER_ADLS_password": {
-						"value": "[parameters('LS_SRC_SQLSERVER_ADLS_password')]"
-					},
-					"STPSQLSERVER_password": {
-						"value": "[parameters('STPSQLSERVER_password')]"
-					},
 					"LS_AZURE_SQL_KV_properties_typeProperties_server": {
 						"value": "[parameters('LS_AZURE_SQL_KV_properties_typeProperties_server')]"
 					},
@@ -454,33 +397,6 @@
 					},
 					"LS_AZURE_SQL_KV_properties_typeProperties_userName": {
 						"value": "[parameters('LS_AZURE_SQL_KV_properties_typeProperties_userName')]"
-					},
-					"LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_server": {
-						"value": "[parameters('LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_server')]"
-					},
-					"LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_database": {
-						"value": "[parameters('LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_database')]"
-					},
-					"LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_userName": {
-						"value": "[parameters('LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_userName')]"
-					},
-					"LS_SRC_SQLSERVER_ADLS_properties_typeProperties_server": {
-						"value": "[parameters('LS_SRC_SQLSERVER_ADLS_properties_typeProperties_server')]"
-					},
-					"LS_SRC_SQLSERVER_ADLS_properties_typeProperties_database": {
-						"value": "[parameters('LS_SRC_SQLSERVER_ADLS_properties_typeProperties_database')]"
-					},
-					"LS_SRC_SQLSERVER_ADLS_properties_typeProperties_userName": {
-						"value": "[parameters('LS_SRC_SQLSERVER_ADLS_properties_typeProperties_userName')]"
-					},
-					"STPSQLSERVER_properties_typeProperties_server": {
-						"value": "[parameters('STPSQLSERVER_properties_typeProperties_server')]"
-					},
-					"STPSQLSERVER_properties_typeProperties_database": {
-						"value": "[parameters('STPSQLSERVER_properties_typeProperties_database')]"
-					},
-					"STPSQLSERVER_properties_typeProperties_userName": {
-						"value": "[parameters('STPSQLSERVER_properties_typeProperties_userName')]"
 					}
 				}
 			},

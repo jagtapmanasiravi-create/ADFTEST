@@ -99,18 +99,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_SRC_LOOKUP_FILTER_DATA'"
 		},
-		"LS_SRC_LOOKUP_FROM_SQLSERVER_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'LS_SRC_LOOKUP_FROM_SQLSERVER'"
-		},
-		"LS_SRC_SQLSERVER_ADLS_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'LS_SRC_SQLSERVER_ADLS'"
-		},
-		"STPSQLSERVER_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'STPSQLSERVER'"
-		},
 		"DS_SINK_AZURESQL_TO_ADLS_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
@@ -199,45 +187,9 @@
 			"type": "string",
 			"defaultValue": "https://adlsdevbankproject.dfs.core.windows.net/"
 		},
-		"LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": ".\\SQLEXPRESS"
-		},
-		"LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "BankingPracticeDB"
-		},
-		"LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "comaml"
-		},
 		"LS_SRC_RESTAPI_ADLS_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://retoolapi.dev/5yDVOt/data"
-		},
-		"LS_SRC_SQLSERVER_ADLS_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": ".\\SQLEXPRESS"
-		},
-		"LS_SRC_SQLSERVER_ADLS_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "BankingPracticeDB"
-		},
-		"LS_SRC_SQLSERVER_ADLS_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "comaml"
-		},
-		"STPSQLSERVER_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": ".\\SQLEXPRESS"
-		},
-		"STPSQLSERVER_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "BankingPracticeDB"
-		},
-		"STPSQLSERVER_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "comaml"
 		},
 		"EVENT_TRIGGER_CPY_BLOB_ADLS_properties_typeProperties_scope": {
 			"type": "string",
@@ -3292,34 +3244,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/LS_SRC_LOOKUP_FROM_SQLSERVER')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"server": "[parameters('LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_server')]",
-					"database": "[parameters('LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_database')]",
-					"encrypt": "optional",
-					"trustServerCertificate": false,
-					"authenticationType": "SQL",
-					"userName": "[parameters('LS_SRC_LOOKUP_FROM_SQLSERVER_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('LS_SRC_LOOKUP_FROM_SQLSERVER_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "selfHostDevBankProject",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/selfHostDevBankProject')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/LS_SRC_RESTAPI_ADLS')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -3333,63 +3257,6 @@
 				}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LS_SRC_SQLSERVER_ADLS')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Onpremises SQL Server to ADLS ",
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"server": "[parameters('LS_SRC_SQLSERVER_ADLS_properties_typeProperties_server')]",
-					"database": "[parameters('LS_SRC_SQLSERVER_ADLS_properties_typeProperties_database')]",
-					"encrypt": "optional",
-					"trustServerCertificate": false,
-					"authenticationType": "SQL",
-					"userName": "[parameters('LS_SRC_SQLSERVER_ADLS_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('LS_SRC_SQLSERVER_ADLS_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "selfHostDevBankProject",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/selfHostDevBankProject')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/STPSQLSERVER')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"server": "[parameters('STPSQLSERVER_properties_typeProperties_server')]",
-					"database": "[parameters('STPSQLSERVER_properties_typeProperties_database')]",
-					"encrypt": "optional",
-					"trustServerCertificate": false,
-					"authenticationType": "SQL",
-					"userName": "[parameters('STPSQLSERVER_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('STPSQLSERVER_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "selfHostDevBankProject",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/selfHostDevBankProject')]"
-			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/EVENT_TRIGGER_CPY_BLOB_ADLS')]",
