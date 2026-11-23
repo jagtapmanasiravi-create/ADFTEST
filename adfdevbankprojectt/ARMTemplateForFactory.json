@@ -3876,7 +3876,7 @@
 			"properties": {
 				"description": "Copy Activity using event trigger",
 				"annotations": [],
-				"runtimeState": "Started",
+				"runtimeState": "Stopped",
 				"pipelines": [
 					{
 						"pipelineReference": {
@@ -3907,7 +3907,7 @@
 			"properties": {
 				"description": "Copy data fron azure sql to adls",
 				"annotations": [],
-				"runtimeState": "Started",
+				"runtimeState": "Stopped",
 				"pipelines": [
 					{
 						"pipelineReference": {
